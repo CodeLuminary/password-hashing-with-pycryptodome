@@ -7,7 +7,7 @@ should_continue = True #This determines wheather the loop should run or not
 lines = [] #This holds each line of the passwd.a.txt file
 hash_passwords = []
 
-with open('passwd_a.txt') as f:
+with open('passwd_a.txt', encoding='utf8') as f:
     lines = f.readlines()
 
 count = 0
@@ -73,8 +73,30 @@ while(should_continue):
             print("Please put only an integer value")
 
     elif option == '3':
-        pass
+        hashpwd = input("Enter hash password\n")
+        plainText = getPlainPassword(hashpwd)
 
+        isAvailable = False
+        #lines = []
+
+        """for line in fileinput.input(['passwd_b.txt']):
+            print(line)
+        """
+
+        lines = []
+        with open('passwd_b.txt', encoding='utf8') as f:
+            lines = f.readlines()
+
+        for line in lines:
+            if plainText == line:
+                isAvailable = True
+                break      
+        
+        f.close() 
+        if isAvailable:
+            print("PlainText password: " + plainText)
+        else:
+            print("Password not available.")    
 
     print("\n")
 

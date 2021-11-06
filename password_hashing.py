@@ -29,6 +29,7 @@ def getPlainPassword(hashpassword):
     for passwds in hash_passwords:
         if hashpassword == passwds["Hashed passwords"]:
             return passwds["plain text"]
+    return ""
 
 while(should_continue):
     option = input(''' Enter 1 to print PasswordTable for the passwd.a.txt file. \n
@@ -76,27 +77,29 @@ while(should_continue):
         hashpwd = input("Enter hash password\n")
         plainText = getPlainPassword(hashpwd)
 
-        isAvailable = False
-        #lines = []
+        if(plainText != ''):
+            isAvailable = False
+            #lines = []
 
-        """for line in fileinput.input(['passwd_b.txt']):
-            print(line)
-        """
+            """for line in fileinput.input(['passwd_b.txt']):
+                print(line)
+            """
 
-        lines = []
-        with open('passwd_b.txt', encoding='utf8') as f:
-            lines = f.readlines()
+            lines = []
+            with open('passwd_b.txt', encoding='utf8') as f:
+                lines = f.readlines()
 
-        for line in lines:
-            if plainText == line:
-                isAvailable = True
-                break      
-        
-        f.close() 
-        if isAvailable:
-            print("PlainText password: " + plainText)
+            for line in lines:
+                if plainText == line:
+                    isAvailable = True
+                    break      
+            
+            f.close() 
+            if isAvailable:
+                print("PlainText password: " + plainText)
+            else:
+                print("Password not available.")    
         else:
-            print("Password not available.")    
-
+            print("Hash password is not available.")
     print("\n")
 
